@@ -1,13 +1,14 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons'; 
 
 export default function FloatingActionButton() {
   const navigation = useNavigation();
 
   return ( 
     <TouchableOpacity style={styles.floatingButton} onPress={() => {navigation.navigate('Cast');}}>
-      <Text style={styles.buttonText}>Cast</Text>
+      <Ionicons name="create-outline" size={40} color="white" />
     </TouchableOpacity>
  );
 }
@@ -15,12 +16,12 @@ export default function FloatingActionButton() {
 const styles = StyleSheet.create({
   floatingButton: {
     position: 'absolute',
-    bottom: 40,
+    bottom: 60,
     right: 10,
     backgroundColor: 'blue',
     borderRadius: 50,
-    width: 90,
-    height: 90,
+    width: 80,
+    height: 80,
     alignItems: 'center',
     justifyContent: 'center',
   },
