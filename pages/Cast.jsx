@@ -42,7 +42,7 @@ export function Cast() {
       <TextInput
         multiline={true}
         numberOfLines={9}
-        style={{ height: '50%', width: '90%', padding: 10, backgroundColor: '#8193F5', borderColor: 'gray', borderRadius: 10, borderWidth: 1}}
+        style={{ height: '50%', width: '90%', paddingTop: 15, fontSize: 18, padding: 10, backgroundColor: '#8193F5', borderColor: 'gray', borderRadius: 10, borderWidth: 1}}
         onChangeText={(text) => {
           setCastText(text); 
           const byteLength = convertStringToByteArray(text).length

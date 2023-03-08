@@ -10,6 +10,11 @@ const WalletContextProvider = ({ children }) => {
   useEffect(() => {
     async function getMnemonic() { 
       const mnemonic = await SecureStore.getItemAsync('mnemonic');
+      
+      if (!mnemonic) { 
+        return;
+      }
+
       const tempWallet = Wallet.fromMnemonic(mnemonic);
 
       setWallet(tempWallet);
