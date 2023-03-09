@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TouchableOpacity } from "react-native";
+import { View, Text, SafeAreaView, StatusBar } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { BoringButton } from "../components/BoringButton";
 
@@ -7,6 +7,7 @@ export function LandingPage() {
 
   return ( 
     <SafeAreaView style={{flex: 1}}>
+      <StatusBar barStyle = "dark-content" hidden = {false} />
       <View style={{flex: 4, alignItems: 'center', paddingLeft: 10, paddingRight: 10}}>
         <View style={{flex: 2}}>
           <Text style={{fontSize: 50, fontWeight: 'bold', paddingTop: 30}}>Welcome to BoringCaster.</Text>

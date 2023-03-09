@@ -9,27 +9,38 @@ const WalletContextProvider = ({ children }) => {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function getMnemonic() { 
-      const mnemonic = await SecureStore.getItemAsync('mnemonic');
-      
-      if (!mnemonic) {
+    try {
+      updateState().catch(async (e) => {
+        await SecureStore.deleteItemAsync('mnemonic');
         setWallet();
-        setLoading(false);
-        return;
-      }
+      });
+    } catch (e) { 
+      deleteMnemonicFromStorage();
+    }
+  }, [])
 
-      const tempWallet = Wallet.fromMnemonic(mnemonic);
+  async function deleteMnemonicFromStorage() { 
+    await SecureStore.deleteItemAsync('mnemonic');
+  }
 
-      setWallet(tempWallet);
+  async function signIn() {
+    const mnemonic = await SecureStore.getItemAsync('mnemonic');
+      
+    if (!mnemonic) {
+      setWallet();
       setLoading(false);
+      throw new Error('Invalid key. Received empty string')
     }
 
-    getMnemonic();
-  }, [])
+    const tempWallet = Wallet.fromMnemonic(mnemonic);
+
+    setWallet(tempWallet);
+    setLoading(false);
+  }
 
   async function updateState() {
     const mnemonic = await SecureStore.getItemAsync('mnemonic');
-      
+
     if (!mnemonic) {
       setWallet();
       setLoading(false);
@@ -45,7 +56,8 @@ const WalletContextProvider = ({ children }) => {
   const contextValue = {
     wallet, 
     isLoading,
-    updateState
+    updateState,
+    signIn
   };
 
   return (

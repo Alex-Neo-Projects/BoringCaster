@@ -9,24 +9,23 @@ import { Ionicons } from '@expo/vector-icons';
 export function EnterMnemonic() {
   const [secretKey, onChangeSecretKey] = useState('');
   const [error, setError] = useState<string>(); 
-  const [doneSaving, setDoneSaving] = useState(false);
-  const { updateState } = useContext(WalletContext);
+  const [loading, setLoading] = useState(false);
+  const { signIn } = useContext(WalletContext);
 
   const navigation = useNavigation();
 
   async function saveSecretKey() { 
     try { 
       // Clear prev error state
+      setLoading(true);
       setError('');
 
-      Wallet.fromMnemonic(secretKey);
       SecureStore.setItemAsync('mnemonic', secretKey);
-
-      setDoneSaving(true);
-
-      updateState();
+      await signIn();
+      setLoading(false);
     } catch (e) {
       setError(e.toString());
+      setLoading(false);
     }
   }
 
@@ -50,7 +49,7 @@ export function EnterMnemonic() {
       />
 
       <Text style={{fontSize: 25, color: 'red', paddingTop: 20, paddingBottom: 20}}>{error}</Text>
-      {doneSaving ? (
+      {loading ? (
         <Text style={{fontSize: 25, paddingBottom: 30, textAlign: 'center'}}>Loading...</Text>
       ) : (
         <TouchableOpacity onPress={() => saveSecretKey()} style={{padding: 20, backgroundColor: 'black', borderRadius: 30, paddingLeft: 40, paddingRight: 40}}>

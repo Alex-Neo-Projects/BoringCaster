@@ -48,8 +48,8 @@ export function Home() {
 
         <View style={{flex: 5}}>
           <View style={{flexDirection: 'row'}}>
-            <Text style={{fontSize: 14, paddingBottom: 5, flex: 1}}>
-              <Text style={{fontWeight: 'bold'}}>{cast.author.displayName}</Text> <Text style={{color: '#373737'}}>@{cast.author.username}</Text>
+            <Text style={{fontSize: 14, paddingBottom: 6, flex: 1}}>
+              <Text style={{fontWeight: 'bold', fontSize: 17}}>{cast.author.displayName}</Text> <Text style={{color: '#373737', fontSize: 17}}>@{cast.author.username}</Text>
             </Text>
           </View>
           <View>
@@ -70,7 +70,7 @@ export function Home() {
       <SafeAreaView style={styles.container} edges={['right', 'left', 'top']}>
         <StatusBar barStyle = "dark-content" hidden = {false} />
 
-        <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+        <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', borderBottomWidth: 2}}>
           <Text style={{fontSize: 25, marginLeft: 50, fontWeight: 'bold', flex: 1, textAlign: 'center'}}>BoringCaster</Text>
 
           <TouchableOpacity onPress={() => navigation.navigate('Settings')} style={{padding: 10}}>

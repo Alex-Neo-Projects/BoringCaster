@@ -16,31 +16,7 @@ What you can do:
    - Write casts 
    - View your own casts 
 
-What it doesn’t have:
-   - No likes 
-   - No feeds
-   - No viewing other people’s casts
+What you can't do: 
+   - everything else (no feeds, no likes, no viewing other ppl's profiles)
 
-Like one comment said: "This sounds more like narcicaster where one gazes into the pond at themself" which is also pretty true. 
-
-Open to suggestions on how to keep it boring while making it less narcisstic!
-
-### Requests for contribution (PRs)
-
-The codebase is written in react native and likely to stay small, but there are some things I do want to add. If you can get to them before me, feel free! 
-
-Coding: 
-- Upload images to posts
-- Delete posts button
-- Render images in posts
-- Show replies to posts
-  - I think replies are a valuable form of discussion. I like the idea of keeping them.
-- Quote casts
-
-Design: 
-- Better design! (Even mockups work!)
-- App icon
-- Splash screen
-
-Other: 
-- Responsive layouts (if anyone other than me ends up using this)
+### Open to PRs!

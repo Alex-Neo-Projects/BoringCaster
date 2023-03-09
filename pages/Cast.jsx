@@ -10,6 +10,7 @@ export function Cast() {
   const [castText, setCastText] = useState('');
   const [error, setError] = useState(''); 
   const [characterCount, setCharacterCount] = useState(0); 
+  const placeHolderOptions = ['Cast your mind', 'Cast away!', "what's poppin", 'Speak up !', "What's on your mind?", 'Cast your thoughts away', "What's happening?"]
 
   const navigation = useNavigation();
 
@@ -46,7 +47,7 @@ export function Cast() {
       <TextInput
         multiline={true}
         numberOfLines={9}
-        placeholder={'Cast your mind'}
+        placeholder={placeHolderOptions[Math.floor(Math.random() * placeHolderOptions.length)]}
         style={{ height: '50%', width: '90%', paddingTop: 15, paddingLeft: 15, paddingRight: 15, fontSize: 18, borderColor: 'gray', borderRadius: 10, borderWidth: 2}}
         onChangeText={(text) => {
           setCastText(text); 
