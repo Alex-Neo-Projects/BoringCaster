@@ -1,4 +1,4 @@
-import { StyleSheet, Text, ActionSheetIOS, Image, RefreshControl, View, FlatList, ActivityIndicator, Button, Pressable, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, Animated, Image, RefreshControl, View, FlatList, ActivityIndicator, Button, Pressable, TouchableOpacity } from 'react-native';
 import { MerkleAPIClient } from "@standard-crypto/farcaster-js";
 import { useContext, useEffect, useState } from 'react';
 import FloatingActionButton from '../components/FloatingActionButton';
@@ -9,12 +9,37 @@ import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
 export function Home() {
+  const { wallet } = useContext(WalletContext);
+
   const [castData, setCastData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { wallet } = useContext(WalletContext);
   const [refreshing, setRefreshing] = useState(false);
 
   const navigation = useNavigation();
+
+  const [showPopup, setShowPopup] = useState(false);
+  const opacity = useState(new Animated.Value(0))[0];
+
+  useEffect(() => {
+    setShowPopup(true);
+    Animated.timing(opacity, {
+      toValue: 1,
+      duration: 1000,
+      useNativeDriver: true,
+    }).start();
+
+    const timer = setTimeout(() => {
+      Animated.timing(opacity, {
+        toValue: 0,
+        duration: 1000,
+        useNativeDriver: true,
+      }).start(() => {
+        setShowPopup(false);
+      });
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   async function getData() {
     const client = new MerkleAPIClient(wallet);
@@ -65,7 +90,7 @@ export function Home() {
     getData()
   }, [])
 
-  return ( 
+  return (
     <View style={{flex: 1}}>
       <SafeAreaView style={styles.container} edges={['right', 'left', 'top']}>
         <StatusBar barStyle = "dark-content" hidden = {false} />
@@ -77,6 +102,12 @@ export function Home() {
             <Feather name="settings" size={30} color="black" />
           </TouchableOpacity>
         </View>
+
+        {showPopup && (
+          <Animated.View style={{ opacity, bottom: 60, position: 'absolute', zIndex: 1, left: '25%', borderRadius: 20, backgroundColor: 'black', width: '50%', justifyContent: 'center', height: 70 }}>
+            <Text style={{color: 'white', textAlign: 'center', fontSize: 20, fontWeight: 'bold'}}>Cast sent!</Text>
+          </Animated.View>
+        )}
 
         {loading ? (
           <View style={{flex: 1, paddingBottom: 100, justifyContent: 'center', alignContent: 'center'}}>
@@ -104,7 +135,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    // alignItems: 'center',
-    // justifyContent: 'center',
   },
 });
