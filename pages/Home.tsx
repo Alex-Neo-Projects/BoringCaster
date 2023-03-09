@@ -6,24 +6,28 @@ import { WalletContext } from '../context/WalletContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'react-native';
 import { Feather } from '@expo/vector-icons'; 
+import { useNavigation } from '@react-navigation/native';
 
 export function Home() {
   const [castData, setCastData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { wallet } = useContext(WalletContext);
   const [refreshing, setRefreshing] = useState(false);
+
+  const navigation = useNavigation();
 
   async function getData() {
     const client = new MerkleAPIClient(wallet);
     const currentUser = await client.fetchCurrentUser();
 
-    let castDataLocal = []; 
+    let castDataLocal = [];
 
     for await (const cast of client.fetchCastsForUser(currentUser)) {
       castDataLocal.push(cast);      
     }
 
     setCastData(castDataLocal);
+    setLoading(false);
   }
 
   const handleRefresh = () => {
@@ -34,7 +38,7 @@ export function Home() {
 
   const Item = ({cast}) => {
     return (
-      <View style={{flex: 1, padding: 20, flexDirection: 'row', backgroundColor: '#8193F5', margin: 10, marginBottom: 5, borderRadius: 10}}>
+      <View style={{flex: 1, padding: 20, flexDirection: 'row', borderColor: 'black', borderWidth: 2, margin: 10, marginBottom: 5, borderRadius: 10}}>
         <View style={{flex: 1}}>
           <Image
             style={{height: 50, width: 50, borderRadius: 20}}
@@ -59,7 +63,6 @@ export function Home() {
   useEffect(() => {
     setLoading(true);
     getData()
-    setLoading(false);
   }, [])
 
   return ( 
@@ -67,12 +70,16 @@ export function Home() {
       <SafeAreaView style={styles.container} edges={['right', 'left', 'top']}>
         <StatusBar barStyle = "dark-content" hidden = {false} />
 
-        <View style={{marginBottom: 10}}>
-          <Text style={{fontSize: 20, fontWeight: 'bold', textAlign: 'center'}}>BoringCaster</Text>
+        <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+          <Text style={{fontSize: 25, marginLeft: 50, fontWeight: 'bold', flex: 1, textAlign: 'center'}}>BoringCaster</Text>
+
+          <TouchableOpacity onPress={() => navigation.navigate('Settings')} style={{padding: 10}}>
+            <Feather name="settings" size={30} color="black" />
+          </TouchableOpacity>
         </View>
 
         {loading ? (
-          <View style={{flex: 1, justifyContent: 'center', alignContent: 'center'}}>
+          <View style={{flex: 1, paddingBottom: 100, justifyContent: 'center', alignContent: 'center'}}>
             <ActivityIndicator size={"large"}/>
           </View>
         ) : (

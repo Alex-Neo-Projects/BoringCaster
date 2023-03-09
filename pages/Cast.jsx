@@ -3,6 +3,7 @@ import { WalletContext } from '../context/WalletContext';
 import { useContext, useState } from 'react';
 import { publishCast } from "@standard-crypto/farcaster-js";
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons, Feather } from '@expo/vector-icons'; 
 
 export function Cast() {
   const { wallet } = useContext(WalletContext);
@@ -32,17 +33,21 @@ export function Cast() {
     return bytes                                                                                                                                                                
   }
   
-
   return (
     <SafeAreaView style={{alignItems: 'center'}}>
-      <View style={{marginBottom: 10, flexDirection: 'row'}}>
-        <Text style={{fontSize: 20, fontWeight: 'bold', textAlign: 'center'}}>Write a cast</Text>
+      <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+        <TouchableOpacity onPress={() => navigation.navigate('Home')} style={{padding: 10, marginLeft: 10}}>
+          <Ionicons name="arrow-back-outline" size={30} color="black" />
+        </TouchableOpacity>
+
+        <Text style={{fontSize: 25, paddingRight: 60, fontWeight: 'bold', flex: 1, textAlign: 'center'}}>Write a cast</Text>
       </View>
 
       <TextInput
         multiline={true}
         numberOfLines={9}
-        style={{ height: '50%', width: '90%', paddingTop: 15, fontSize: 18, padding: 10, backgroundColor: '#8193F5', borderColor: 'gray', borderRadius: 10, borderWidth: 1}}
+        placeholder={'Cast your mind'}
+        style={{ height: '50%', width: '90%', paddingTop: 15, paddingLeft: 15, paddingRight: 15, fontSize: 18, borderColor: 'gray', borderRadius: 10, borderWidth: 2}}
         onChangeText={(text) => {
           setCastText(text); 
           const byteLength = convertStringToByteArray(text).length
@@ -56,8 +61,8 @@ export function Cast() {
       </View>
       <Text style={{fontSize: 20, color: 'red', textAlign: 'center'}}>{error}</Text>
       
-      <TouchableOpacity onPress={() => submitCast()} style={{backgroundColor: 'green', padding: 20, borderRadius: 50, paddingLeft: 50, paddingRight: 50}}>
-        <Text style={{fontSize: 20}}>Send</Text>
+      <TouchableOpacity onPress={() => submitCast()} style={{backgroundColor: 'black', padding: 20, borderRadius: 50, paddingLeft: 50, paddingRight: 50}}>
+        <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>Send</Text>
       </TouchableOpacity>
     </SafeAreaView>
  );
