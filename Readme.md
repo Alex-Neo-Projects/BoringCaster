@@ -1,12 +1,12 @@
 # BoringCaster
 
-A farcaster client intentionally made to be *boring*. 
+A farcaster client intentionally made to be *boring*.
 
 ### Why?
 
 I'm frustrated by the idea that twitter is so addicting that I can't control my attention. 
 
-And as they say, "the most effective form of complaint is action", so here's my attempt at taking the internet back and putting myself in control in a very small way.
+And you know what they say, "the most effective form of complaint is action", or something.
 
 ### Features
 
