@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "boringcaster",
+    "name": "BoringCaster",
     "slug": "boringcaster",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -15,7 +15,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.alex243.boringcaster"
     },
     "android": {
       "adaptiveIcon": {
@@ -28,7 +29,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "48d06dca-76c1-41dd-a47d-d9143f8cecc6"
+        "projectId": "d67c3b26-9265-4fd9-b44f-abb77ed1ab25"
       }
     },
     "runtimeVersion": {
@@ -36,6 +37,7 @@
     },
     "updates": {
       "url": "https://u.expo.dev/48d06dca-76c1-41dd-a47d-d9143f8cecc6"
-    }
+    },
+    "owner": "alex243"
   }
 }

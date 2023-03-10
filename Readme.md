@@ -2,8 +2,6 @@
 
 A farcaster client intentionally made to be *boring*. 
 
-*Want a testflight? I'll do it if literally 1 person wants it.*
-
 ### Why?
 
 I'm frustrated by the idea that twitter is so addicting that I can't control my attention. 
