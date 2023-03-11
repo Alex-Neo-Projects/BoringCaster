@@ -41,6 +41,8 @@ export function Home() {
         });
       }, 2000);
   
+      getData();
+
       return () => clearTimeout(timer);
     }
   }, [route, navigation]);
