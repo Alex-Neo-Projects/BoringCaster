@@ -20,7 +20,7 @@ export function Cast() {
 
       await publishCast(wallet, castText);
       
-      navigation.navigate('Home')
+      navigation.navigate('Home', {'castSent': "true"})
     } catch (e) { 
       setError(e.toString());
     }

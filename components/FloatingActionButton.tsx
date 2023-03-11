@@ -16,12 +16,12 @@ export default function FloatingActionButton() {
 const styles = StyleSheet.create({
   floatingButton: {
     position: 'absolute',
-    bottom: 60,
+    bottom: 70,
     right: 10,
     backgroundColor: 'black',
     borderRadius: 50,
-    width: 80,
-    height: 80,
+    width: 70,
+    height: 70,
     alignItems: 'center',
     justifyContent: 'center',
   },

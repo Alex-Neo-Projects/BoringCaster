@@ -6,7 +6,8 @@ import { WalletContext } from '../context/WalletContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'react-native';
 import { Feather } from '@expo/vector-icons'; 
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import CastCard from '../components/CastCard';
 
 export function Home() {
   const { wallet } = useContext(WalletContext);
@@ -16,30 +17,33 @@ export function Home() {
   const [refreshing, setRefreshing] = useState(false);
 
   const navigation = useNavigation();
+  const route = useRoute();
 
   const [showPopup, setShowPopup] = useState(false);
   const opacity = useState(new Animated.Value(0))[0];
 
   useEffect(() => {
-    setShowPopup(true);
-    Animated.timing(opacity, {
-      toValue: 1,
-      duration: 1000,
-      useNativeDriver: true,
-    }).start();
-
-    const timer = setTimeout(() => {
+    if (route && route.params && ('castSent' in route.params)) { 
+      setShowPopup(true);
       Animated.timing(opacity, {
-        toValue: 0,
+        toValue: 1,
         duration: 1000,
         useNativeDriver: true,
-      }).start(() => {
-        setShowPopup(false);
-      });
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
+      }).start();
+  
+      const timer = setTimeout(() => {
+        Animated.timing(opacity, {
+          toValue: 0,
+          duration: 1000,
+          useNativeDriver: true,
+        }).start(() => {
+          setShowPopup(false);
+        });
+      }, 2000);
+  
+      return () => clearTimeout(timer);
+    }
+  }, [route, navigation]);
 
   async function getData() {
     const client = new MerkleAPIClient(wallet);
@@ -63,25 +67,7 @@ export function Home() {
 
   const Item = ({cast}) => {
     return (
-      <View style={{flex: 1, padding: 20, flexDirection: 'row', borderColor: 'black', borderWidth: 2, margin: 10, marginBottom: 5, borderRadius: 10}}>
-        <View style={{flex: 1}}>
-          <Image
-            style={{height: 50, width: 50, borderRadius: 20}}
-            source={{uri: cast.author.pfp.url}}
-          />
-        </View>
-
-        <View style={{flex: 5}}>
-          <View style={{flexDirection: 'row'}}>
-            <Text style={{fontSize: 14, paddingBottom: 6, flex: 1}}>
-              <Text style={{fontWeight: 'bold', fontSize: 17}}>{cast.author.displayName}</Text> <Text style={{color: '#373737', fontSize: 17}}>@{cast.author.username}</Text>
-            </Text>
-          </View>
-          <View>
-            <Text style={{fontSize: 18}}>{cast.text}</Text>
-          </View>
-        </View>
-      </View>
+      <CastCard cast={cast}/>
     )
   };
 
