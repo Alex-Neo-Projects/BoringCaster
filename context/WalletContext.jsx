@@ -10,7 +10,7 @@ const WalletContextProvider = ({ children }) => {
 
   useEffect(() => {
     try {
-      updateState().catch(async (e) => {
+      signIn().catch(async (e) => {
         await SecureStore.deleteItemAsync('mnemonic');
         setWallet();
       });
@@ -33,6 +33,7 @@ const WalletContextProvider = ({ children }) => {
     }
 
     const tempWallet = Wallet.fromMnemonic(mnemonic);
+    console.log('temp wallet: ', tempWallet)
 
     setWallet(tempWallet);
     setLoading(false);
