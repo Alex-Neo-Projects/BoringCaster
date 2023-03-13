@@ -75,7 +75,7 @@ export function Cast() {
                 <ActivityIndicator size={"large"} />
               </View>
             ) : (
-              <View style={{ flex: 1, alignItems: 'center' }}>
+              <View style={{ flex: 1, alignItems: 'center'}}>
                 <Text style={{fontSize: 20, color: 'red', textAlign: 'center'}}>{error}</Text>
                 
                 <TouchableOpacity onPress={() => submitCast()} style={{backgroundColor: 'black', padding: 20, borderRadius: 50, paddingLeft: 50, paddingRight: 50}}>

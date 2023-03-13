@@ -53,10 +53,12 @@ export function EnterMnemonic() {
                 />
               </View>
 
-              <View style={{flex: 1, paddingBottom: 20, alignItems: 'center'}}>
-                <Text style={{fontSize: 25, color: 'red', paddingTop: 20, paddingBottom: 20}}>{error}</Text>
+              <View style={{flex: 1, alignItems: 'center'}}>
+                { error && (
+                  <Text style={{fontSize: 25, color: 'red', paddingBottom: 20}}>{error}</Text>
+                )}
                 {loading ? (
-                  <Text style={{fontSize: 25, paddingBottom: 30, textAlign: 'center'}}>Loading...</Text>
+                  <Text style={{fontSize: 25, textAlign: 'center'}}>Loading...</Text>
                 ) : (
                   <TouchableOpacity onPress={() => saveSecretKey()} style={{padding: 20, backgroundColor: 'black', borderRadius: 30, paddingLeft: 40, paddingRight: 40}}>
                     <Text style={{fontSize: 20, color: 'white', fontWeight: 'bold'}}>Submit</Text>

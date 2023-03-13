@@ -23,20 +23,26 @@ const WalletContextProvider = ({ children }) => {
     await SecureStore.deleteItemAsync('mnemonic');
   }
 
-  async function signIn() {
-    const mnemonic = await SecureStore.getItemAsync('mnemonic');
-      
-    if (!mnemonic) {
-      setWallet();
-      setLoading(false);
-      throw new Error('Invalid key. Received empty string')
-    }
-
-    const tempWallet = Wallet.fromMnemonic(mnemonic);
-    console.log('temp wallet: ', tempWallet)
-
-    setWallet(tempWallet);
-    setLoading(false);
+  function signIn() {
+    return new Promise(async (resolve, reject) => {
+      try { 
+        const mnemonic = await SecureStore.getItemAsync('mnemonic');
+          
+        if (!mnemonic) {
+          setWallet();
+          setLoading(false);
+          throw new Error('Invalid key. Received empty string')
+        }
+        
+        const tempWallet = Wallet.fromMnemonic(mnemonic);
+        
+        resolve();
+        setWallet(tempWallet);
+        setLoading(false);
+      } catch (e) { 
+        reject(e);
+      }
+    })
   }
 
   async function updateState() {

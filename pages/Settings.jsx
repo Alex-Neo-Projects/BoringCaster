@@ -1,4 +1,4 @@
-import { SafeAreaView, Text, View, TouchableOpacity, ActivityIndicator } from "react-native";
+import { SafeAreaView, Text, View, Linking, TouchableOpacity, ActivityIndicator } from "react-native";
 import { Ionicons } from '@expo/vector-icons'; 
 import { useNavigation } from '@react-navigation/native';
 import { useState, useContext } from "react";
@@ -44,7 +44,11 @@ export function Settings() {
         </View>
       ) : (
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', paddingBottom: 30}}>
-          <TouchableOpacity onPress={() => signOut()} style={{backgroundColor: 'black', width: 150, height: 70, borderRadius: 50, alignItems: 'center', justifyContent: 'center'}}>
+          <TouchableOpacity onPress={() => Linking.openURL('https://github.com/Alex-Neo-Projects/BoringCaster')} style={{marginBottom: 50, backgroundColor: 'white', borderWidth: 2, width: 250, height: 80, borderRadius: 50, alignItems: 'center', justifyContent: 'center'}}>
+            <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>View source on github</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => signOut()} style={{backgroundColor: 'black', width: 250, height: 80, borderRadius: 50, alignItems: 'center', justifyContent: 'center'}}>
             <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>Sign out</Text>
           </TouchableOpacity>
 
