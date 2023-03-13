@@ -30,7 +30,7 @@ export function SecretKeyDisclaimer() {
       </View>
 
       <View style={{flex: 1, alignItems: 'center'}}>
-        <BoringButton widthSize={200} innerText={'continue'} onPress={() => navigation.navigate('EnterMnemonic')}></BoringButton>
+        <BoringButton widthSize={200} innerText={'Continue'} onPress={() => navigation.navigate('EnterMnemonic')}></BoringButton>
       </View>
     </SafeAreaView>
  );
